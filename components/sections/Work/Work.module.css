@@ -83,6 +83,7 @@
   align-items: center;
   justify-content: center;
   perspective: 1500px;
+  transform: translateY(-36px);
   /* NO transform-style: preserve-3d — that overrides CSS z-index with
      3D depth, causing off-center cards to intercept clicks.
      Each .card gets its own 3D context so rotationY still renders correctly. */
@@ -416,6 +417,7 @@
     display: flex;
     justify-content: flex-start;
     gap: 20px;
+    transform: none;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     padding: 10px 20px 30px;
