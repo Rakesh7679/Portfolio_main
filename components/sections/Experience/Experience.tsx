@@ -176,17 +176,8 @@ export default function Experience() {
     });
 
     mm.add("(max-width: 1000px), (prefers-reduced-motion: reduce)", () => {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      gsap.utils.toArray<HTMLElement>(`.${styles.board}`).forEach((b) => {
-        gsap.from(b, {
-          y: 40,
-          autoAlpha: 0,
-          duration: 0.85,
-          ease: EASE.outExpo,
-          immediateRender: false,
-          scrollTrigger: { trigger: b, start: "top 88%" },
-        });
-      });
+      // Mobile native layout handles rendering cleanly via CSS
+      return;
     });
 
     return () => mm.revert();

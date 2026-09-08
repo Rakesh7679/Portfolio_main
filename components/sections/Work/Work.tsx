@@ -88,11 +88,7 @@ export default function Work() {
       return () => st.kill();
     });
 
-    /* Touch & reduced motion: the snap row needs no JS. The reveal tween that
-       used to live here could never run — the snap-row CSS pins the cards with
-       `transform: none !important; opacity: 1 !important`, which inline GSAP
-       styles cannot beat — so it was dead code that only risked flashing the
-       cards through a hidden state. The row simply renders. */
+    /* Touch & reduced motion: the native snap row renders directly via CSS. */
 
     return () => mm.revert();
   }, []);

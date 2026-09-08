@@ -398,26 +398,27 @@
 @media (max-width: 1100px), (prefers-reduced-motion: reduce) {
   .work {
     min-height: 0;
-    padding: 80px 0 0;
+    padding: 60px 0;
+    overflow: visible;
   }
   .header {
-    padding: 0 24px;
+    padding: 0 20px;
   }
   .stage {
     perspective: none;
     min-height: 0;
     display: block;
-    margin-top: 40px;
+    margin-top: 28px;
   }
   .track {
     position: static;
     height: auto;
     display: flex;
     justify-content: flex-start;
-    gap: 18px;
+    gap: 20px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding: 6px 24px 26px;
+    padding: 10px 20px 30px;
     scrollbar-width: none;
   }
   .track::-webkit-scrollbar {
@@ -425,23 +426,20 @@
   }
   .card {
     position: static;
-    flex: 0 0 82vw;
-    max-width: 320px;
+    flex: 0 0 min(85vw, 360px);
+    min-width: 0;
+    width: min(85vw, 360px);
     scroll-snap-align: center;
-    transform: none !important;
+    border-radius: 20px;
     opacity: 1 !important;
+    visibility: visible !important;
   }
   .cover {
-    height: 240px;
+    height: 220px;
   }
   .foot {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    padding: 6px 24px 30px;
+    display: none;
   }
-  /* The dots track the arc's active card, and the arc doesn't run here — the
-     snap row is scrolled by thumb. Left visible they sat frozen on card one
-     forever, so they go with the counter and the hint. */
   .count,
   .hint,
   .dots {

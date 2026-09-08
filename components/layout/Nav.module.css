@@ -13,6 +13,12 @@
   transition: opacity 0.5s ease, transform 0.7s var(--ease-out-expo);
 }
 
+:global(body.intro-active) .wrap {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 /* CORRECTION 01 — the header is now present from the very first viewport,
    including over the opening tunnel. It is never hidden or duplicated. */
 

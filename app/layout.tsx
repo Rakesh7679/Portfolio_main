@@ -65,7 +65,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${inter.variable} ${instrumentSerif.variable} ${caveat.variable}`}
     >
-      <body suppressHydrationWarning>
+      <body className="intro-active" suppressHydrationWarning>
         <LanguageProvider>
           <SmoothScroll>{children}</SmoothScroll>
         </LanguageProvider>

@@ -48,6 +48,15 @@ export default function Nav() {
   }, []);
 
   useEffect(() => {
+    // Add intro-active by default on mount so navbar stays hidden during loading
+    if (typeof window !== "undefined") {
+      if (window.scrollY < 200) {
+        document.body.classList.add("intro-active");
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     const nav = ref.current;
     if (!nav) return;
 

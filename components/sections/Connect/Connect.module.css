@@ -291,6 +291,17 @@
   .connect {
     padding-top: 100px;
   }
+  .contactFormContainer {
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 28px 20px;
+    border-radius: 18px;
+  }
+  .inputGroup input,
+  .inputGroup textarea {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
   .arc {
     gap: 16px;
     margin-top: 56px;

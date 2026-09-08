@@ -60,14 +60,49 @@ const T_RELEASE = 0.9; /* canvas begins to release (fade) */
 const MOUSE_X = 0.11;
 const MOUSE_Y = 0.07;
 
-export default function TunnelIntro({ text = "RAKESH" }: { text?: string }) {
+export default function TunnelIntro({ text = "RAKESH LAHA" }: { text?: string }) {
   const rootRef = useRef<HTMLElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [webglOk, setWebglOk] = useState(true);
   const { t } = useLang();
 
+  const [displayText, setDisplayText] = useState("");
+  const targetText = "RAKESH LAHA";
+  const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+
+  const updateScramble = (progressRatio: number) => {
+    const initialText = "SYSTEM INITIALIZING...";
+    if (progressRatio <= 0.005) {
+      setDisplayText(initialText);
+      return;
+    }
+    if (progressRatio >= 0.35) {
+      setDisplayText(targetText);
+      return;
+    }
+
+    const ratio = Math.min(1, progressRatio / 0.35);
+    const targetLen = targetText.length;
+    const resolvedCount = Math.floor(ratio * targetLen);
+
+    let result = "";
+    for (let i = 0; i < targetLen; i++) {
+      if (i < resolvedCount) {
+        result += targetText[i];
+      } else {
+        result += CHARS[Math.floor(Math.random() * CHARS.length)];
+      }
+    }
+    setDisplayText(result);
+  };
+
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.history.scrollRestoration = "manual";
+      window.scrollTo(0, 0);
+    }
+
     const rootEl = rootRef.current;
     const frame = frameRef.current;
     const canvas = canvasRef.current;
@@ -409,6 +444,11 @@ export default function TunnelIntro({ text = "RAKESH" }: { text?: string }) {
       canvas.style.opacity = String(1 - rel);
       if (progressWrap) progressWrap.style.opacity = String(1 - rel);
       if (hintEl) hintEl.style.opacity = String(Math.max(0, 1 - progress * 6) * (1 - rel));
+      
+      const spotlightEl = rootEl.querySelector<HTMLElement>(`.${styles.spotlightOverlay}`);
+      if (spotlightEl) {
+        spotlightEl.style.opacity = String(Math.max(0, 1 - progress * 4));
+      }
 
       renderer.render(scene, camera);
     };
@@ -434,6 +474,7 @@ export default function TunnelIntro({ text = "RAKESH" }: { text?: string }) {
       invalidateOnRefresh: true,
       onUpdate: (self) => {
         progress = self.progress;
+        updateScramble(self.progress);
         /* nav returns as the hero arrives */
         document.body.classList.toggle("intro-active", self.progress < 0.94);
         /* progress rail */
@@ -479,12 +520,21 @@ export default function TunnelIntro({ text = "RAKESH" }: { text?: string }) {
   return (
     <section className={styles.intro} id="intro" ref={rootRef}>
       <div className={styles.frame} ref={frameRef}>
+        {/* Spotlight Beam & Scramble Text Overlay */}
+        <div className={styles.spotlightOverlay} aria-hidden="true">
+          <div className={styles.spotlightBeam} />
+          <div className={styles.spotlightContent}>
+            <h2 className={styles.spotlightTitle}>{displayText}</h2>
+            <p className={styles.spotlightSubtitle}>Creative Fullstack Developer</p>
+          </div>
+        </div>
+
         {webglOk ? (
           <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
         ) : (
-          <span className={styles.fallback}>{text}</span>
+          <span className={styles.fallback}>{displayText}</span>
         )}
-        <h1 className={styles.srOnly}>{text} — Full Stack Developer &amp; MERN Stack Engineer</h1>
+        <h1 className={styles.srOnly}>RAKESH LAHA — Full Stack Developer &amp; MERN Stack Engineer</h1>
 
         <p className={styles.hint} aria-hidden="true">
           {t("intro.scroll")}
