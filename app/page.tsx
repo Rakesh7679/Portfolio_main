@@ -15,7 +15,7 @@ export default function Home() {
     <>
       <Nav />
       <main>
-        <Scene order={1} runway={6} id="intro" keepOnMobile>
+        <Scene order={1} runway={6} id="intro">
           <TunnelIntro />
         </Scene>
 
@@ -27,7 +27,7 @@ export default function Home() {
           <About />
         </Scene>
 
-        <Scene order={4} runway={6} id="journey" keepOnMobile>
+        <Scene order={4} runway={6} id="journey">
           <Journey />
         </Scene>
 

@@ -212,6 +212,22 @@
   }
 }
 
+/* ============ MOBILE — release the sticky hold ============
+   On mobile, the Scene's .keepFrame class makes this intro
+   position:sticky which causes it to permanently block content
+   below with a white 100svh rectangle. Override it so the frame
+   scrolls normally into the page and out of view. */
+@media (max-width: 1000px) {
+  /* The parent .hold/.keepFrame gets position:sticky from Scene.module.css.
+     We override the frame itself so content is not clipped. */
+  .frame {
+    position: relative;
+    /* Shorter on mobile — the full 100svh tunnel journey is a desktop treat */
+    height: 100svh;
+    overflow: hidden;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hint {
     animation: none;

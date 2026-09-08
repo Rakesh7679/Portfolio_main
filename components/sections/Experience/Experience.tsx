@@ -87,7 +87,7 @@ export default function Experience() {
             b.style.transform =
               `translate3d(${(k * RIGHT).toFixed(1)}px, ${(-k * UP).toFixed(1)}px, ${(-k * BACK).toFixed(1)}px)` +
               ` scale(${(1 - k * 0.028).toFixed(3)})`;
-            b.style.opacity = String(Math.max(0, 1 - k * 0.16));
+            b.style.opacity = String(Math.max(0.7, 1 - k * 0.1));
             b.style.filter = k > 1.2 ? `blur(${Math.min(3, (k - 1.2) * 1.2).toFixed(2)}px)` : "";
             b.style.zIndex = String(200 - Math.round(k * 10));
           } else {
@@ -176,8 +176,13 @@ export default function Experience() {
     });
 
     mm.add("(max-width: 1000px), (prefers-reduced-motion: reduce)", () => {
-      // Mobile native layout handles rendering cleanly via CSS
-      return;
+      const boards = gsap.utils.toArray<HTMLElement>(`.${styles.board}`);
+      boards.forEach((b) => {
+        gsap.set(b, {
+          clearProps: "transform,opacity,visibility,x,y,z,scale,rotationX,rotationY,filter,zIndex",
+        });
+      });
+      return () => {};
     });
 
     return () => mm.revert();

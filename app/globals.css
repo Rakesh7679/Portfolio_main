@@ -39,6 +39,12 @@ section[id],
   scroll-margin-top: var(--nav-offset);
 }
 
+@media (max-width: 1000px) {
+  :root {
+    --nav-offset: 80px;
+  }
+}
+
 html.lenis,
 html.lenis body {
   height: auto;

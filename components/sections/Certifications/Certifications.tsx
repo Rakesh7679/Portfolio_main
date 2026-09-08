@@ -191,8 +191,13 @@ export default function Certifications() {
     });
 
     mm.add("(max-width: 1000px), (prefers-reduced-motion: reduce)", () => {
-      // Mobile native layout handles rendering cleanly via CSS
-      return;
+      const panels = gsap.utils.toArray<HTMLElement>(`.${styles.panel}`);
+      panels.forEach((p) => {
+        gsap.set(p, {
+          clearProps: "transform,opacity,visibility,x,y,z,scale,rotationX,rotationY,filter,zIndex",
+        });
+      });
+      return () => {};
     });
 
     return () => mm.revert();

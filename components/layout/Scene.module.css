@@ -41,33 +41,21 @@
    Scenes that genuinely ARE one screen on a phone (the tunnel, the journey,
    the drift wall) opt out with `.keepFrame` and keep the cinematic hold. */
 @media (max-width: 1000px) {
-  .hold {
-    position: static;
-    height: auto;
-    min-height: auto;
-    overflow: visible;
-    isolation: auto;
-  }
-  .hold > * {
-    height: auto;
-  }
-  .runway {
-    display: none;
-  }
-
-  /* full-screen-on-mobile scenes keep their frame */
+  .hold,
   .keepFrame {
-    position: sticky;
-    top: 0;
-    height: 100svh;
-    overflow: hidden;
-    isolation: isolate;
+    position: static !important;
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    isolation: auto !important;
   }
+  .hold > *,
   .keepFrame > * {
-    height: 100%;
+    height: auto !important;
   }
+  .runway,
   .keepRunway {
-    display: block;
+    display: none !important;
   }
 }
 

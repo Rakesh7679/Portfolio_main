@@ -47,17 +47,11 @@ export default function Hero() {
     const el = root.current;
     if (!el || prefersReducedMotion()) return;
 
-    const ctx = gsap.context(() => {
-      /* ---------- Entrance: plays when the hero ARRIVES (revealed by the
-         tunnel opening above it), not on page load ---------- */
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 1001px) and (prefers-reduced-motion: no-preference)", () => {
+      /* ---------- Entrance ---------- */
       const tl = gsap.timeline({
-        /* immediateRender:false is load-bearing here, not a nicety. Every
-           tween below is a `.from()`, which by default hides its target the
-           moment the timeline is built and only restores it when the trigger
-           fires. If that trigger never resolves — which happens when the
-           section is held inside a scene — the kicker, sub-copy and BOTH
-           CTAs stay invisible forever. This way the hero renders complete
-           and the entrance is an enhancement layered on top. */
         defaults: { ease: EASE.outExpo, immediateRender: false },
         scrollTrigger: { trigger: el, start: "top 85%", once: true },
       });
@@ -85,7 +79,7 @@ export default function Hero() {
         )
         .from(`.${styles.scrollCue}`, { y: 16, autoAlpha: 0, duration: 0.7 }, "-=0.6");
 
-      /* stat count-up — synced to the entrance timeline, not page load */
+      /* stat count-up */
       tl.call(
         () => {
           gsap.utils.toArray<HTMLElement>(`.${styles.statNum}`).forEach((numEl) => {
@@ -128,7 +122,7 @@ export default function Hero() {
         });
       });
 
-      /* ---------- Mouse: layered parallax + a breath of portrait tilt ---------- */
+      /* ---------- Mouse ---------- */
       const layers = gsap.utils.toArray<HTMLElement>("[data-depth]");
       const setters = layers.map((layer) => ({
         depth: Number(layer.dataset.depth),
@@ -150,7 +144,7 @@ export default function Hero() {
       };
       window.addEventListener("mousemove", onMove);
 
-      /* ---------- Scroll: gentle layered exit ---------- */
+      /* ---------- Scroll exit ---------- */
       gsap
         .timeline({
           scrollTrigger: { trigger: el, start: "top top", end: "bottom top", scrub: true },
@@ -161,9 +155,38 @@ export default function Hero() {
         .to(`.${styles.ambient}`, { autoAlpha: 0 }, 0);
 
       return () => window.removeEventListener("mousemove", onMove);
-    }, el);
+    });
 
-    return () => ctx.revert();
+    mm.add("(max-width: 1000px)", () => {
+      /* Mobile: set stat numbers directly and clear inline GSAP styles */
+      gsap.utils.toArray<HTMLElement>(`.${styles.statNum}`).forEach((numEl) => {
+        const target = Number(numEl.dataset.count || 0);
+        if (numEl.firstChild) {
+          numEl.firstChild.textContent = String(target);
+        }
+      });
+
+      const targets = [
+        `.${styles.head}`,
+        `.${styles.kicker}`,
+        `.${styles.row}`,
+        `.${styles.sub}`,
+        `.${styles.ctas}`,
+        `.${styles.arch}`,
+        `.${styles.portrait}`,
+        `.${styles.statCard}`,
+        `.${styles.ambient}`
+      ];
+      targets.forEach((sel) => {
+        gsap.utils.toArray<HTMLElement>(sel).forEach((node) => {
+          gsap.set(node, {
+            clearProps: "transform,opacity,visibility,x,y,z,scale,autoAlpha",
+          });
+        });
+      });
+    });
+
+    return () => mm.revert();
   }, []);
 
   return (

@@ -243,6 +243,63 @@
   }
 }
 
+@media (max-width: 560px) {
+  .h2 {
+    font-size: clamp(28px, 9vw, 44px);
+  }
+  .center {
+    width: min(190px, 58%);
+  }
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    margin-bottom: 12px;
+  }
+  .lede {
+    font-size: 12.5px;
+  }
+  .card {
+    margin-left: -22px;
+    margin-top: -22px;
+    width: 44px;
+  }
+  .face {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+  }
+  .mark {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 390px) {
+  .h2 {
+    font-size: clamp(24px, 8.5vw, 36px);
+  }
+  .center {
+    width: min(170px, 55%);
+  }
+  .lede {
+    font-size: 12px;
+  }
+  .card {
+    margin-left: -18px;
+    margin-top: -18px;
+    width: 36px;
+  }
+  .face {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+  .mark {
+    width: 20px;
+    height: 20px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .face {
     transition: none;

@@ -403,12 +403,28 @@
   .hero {
     padding-top: 104px;
     gap: 34px;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .head,
+  .kicker,
+  .h1,
+  .row,
+  .sub,
+  .ctas,
+  .portrait,
+  .statCard {
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
   .stageRow {
     grid-template-columns: 1fr;
     gap: 34px;
     padding: 0 24px;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
   .side {
@@ -467,20 +483,85 @@
 
 @media (max-width: 560px) {
   .h1 {
-    font-size: clamp(36px, 10.5vw, 50px);
+    font-size: clamp(32px, 9.5vw, 48px);
+  }
+
+  .sub {
+    font-size: 14.5px;
+    padding: 0 8px;
   }
 
   .ctas {
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
   }
 
   .statCard {
-    width: calc(50% - 12px);
-    min-width: 148px;
+    width: calc(50% - 8px);
+    min-width: 130px;
+    padding: 14px 16px;
+  }
+
+  .statNum {
+    font-size: 24px;
   }
 
   .glow {
-    width: 320px;
-    height: 320px;
+    width: 280px;
+    height: 280px;
+  }
+
+  .head {
+    padding: 16px 16px 0;
+  }
+
+  .stageRow {
+    padding: 0 12px;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 390px) {
+  .h1 {
+    font-size: clamp(28px, 9vw, 38px);
+  }
+
+  .kicker {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+  }
+
+  .sub {
+    font-size: 14px;
+    margin-top: 14px;
+  }
+
+  .statCard {
+    width: calc(50% - 6px);
+    min-width: 120px;
+    padding: 12px 12px;
+  }
+
+  .statNum {
+    font-size: 22px;
+  }
+
+  .statLabel {
+    font-size: 11px;
+  }
+
+  .side {
+    gap: 12px;
+  }
+
+  .chip {
+    width: 42px;
+    height: 42px;
+  }
+
+  .chip img {
+    width: 22px;
+    height: 22px;
   }
 }

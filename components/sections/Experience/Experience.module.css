@@ -150,7 +150,7 @@
   font-size: 12.5px;
   font-weight: 800;
   letter-spacing: 0.08em;
-  opacity: 0.95;
+  opacity: 1;
   white-space: nowrap;
 }
 .type {
@@ -170,7 +170,7 @@
 .company {
   font-size: 14px;
   font-weight: 800;
-  opacity: 0.92;
+  opacity: 1;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -302,7 +302,7 @@
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  opacity: 0.72;
+  opacity: 0.9;
 }
 
 /* two-column body — spacious, editorial */
@@ -324,7 +324,7 @@
   font-weight: 800;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  opacity: 0.62;
+  opacity: 0.85;
   margin-bottom: 8px;
 }
 .lblGap {
@@ -333,13 +333,13 @@
 .summary {
   font-size: clamp(14px, 1.05vw, 16.5px);
   line-height: 1.55;
-  opacity: 0.96;
+  opacity: 1;
 }
 .list {
   margin: 12px 0 0 17px;
   font-size: clamp(12.5px, 0.92vw, 14px);
   line-height: 1.5;
-  opacity: 0.86;
+  opacity: 0.95;
 }
 .list li {
   margin-bottom: 6px;
@@ -490,24 +490,25 @@
   }
   .board {
     position: relative !important;
-    inset: auto;
-    width: 100%;
-    left: auto;
-    right: auto;
-    top: auto;
-    bottom: auto;
-    margin-top: 0;
-    height: auto;
-    min-height: 0;
+    inset: auto !important;
+    width: 100% !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    margin-top: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
     display: flex !important;
-    gap: 16px;
-    padding: 24px 20px;
-    border-radius: 16px;
+    flex-direction: column !important;
+    gap: 16px !important;
+    padding: 24px 20px !important;
+    border-radius: 16px !important;
     transform: none !important;
     opacity: 1 !important;
     visibility: visible !important;
     filter: none !important;
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.18) !important;
   }
   .strip {
     height: auto;
@@ -515,20 +516,30 @@
     flex-wrap: wrap;
     white-space: normal;
     gap: 8px 12px;
+    opacity: 1 !important;
   }
   .company {
     font-size: 15px;
+    opacity: 1 !important;
+  }
+  .year {
+    opacity: 1 !important;
+  }
+  .loc {
+    opacity: 0.95 !important;
   }
   .role {
     font-size: 22px;
     line-height: 1.15;
     max-width: none;
+    opacity: 1 !important;
   }
   .body {
     grid-template-columns: 1fr;
     gap: 18px;
     margin-top: 14px;
     padding-top: 18px;
+    opacity: 1 !important;
   }
   .detailCol {
     grid-template-columns: 1fr;
@@ -541,19 +552,88 @@
     order: -1;
     justify-content: flex-start;
     transform: none !important;
+    opacity: 1 !important;
   }
   .type {
     margin-left: 0;
+    opacity: 1 !important;
+  }
+  .lbl {
+    opacity: 0.9 !important;
   }
   .summary {
     font-size: 14px;
     line-height: 1.6;
+    opacity: 1 !important;
   }
   .list {
     font-size: 13px;
     margin-top: 8px;
+    opacity: 1 !important;
+  }
+  .outcome {
+    opacity: 1 !important;
+  }
+  .skills i {
+    opacity: 1 !important;
   }
   .foot {
     display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .experience {
+    padding: 48px 0;
+  }
+  .stage {
+    gap: 14px;
+    padding: 0 14px;
+  }
+  .board {
+    padding: 20px 16px;
+    gap: 12px;
+  }
+  .role {
+    font-size: 19px;
+  }
+  .h2 {
+    font-size: clamp(20px, 6vw, 28px);
+  }
+  .summary {
+    font-size: 13.5px;
+  }
+  .list {
+    font-size: 12.5px;
+  }
+  .skills i {
+    font-size: 10px;
+    padding: 4px 9px;
+  }
+}
+
+@media (max-width: 390px) {
+  .experience {
+    padding: 40px 0;
+  }
+  .header {
+    padding: 0 14px;
+  }
+  .stage {
+    padding: 0 10px;
+    gap: 12px;
+  }
+  .board {
+    padding: 16px 14px;
+    border-radius: 14px;
+  }
+  .role {
+    font-size: 17px;
+  }
+  .company {
+    font-size: 13.5px;
+  }
+  .strip {
+    gap: 6px 8px;
   }
 }

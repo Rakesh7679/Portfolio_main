@@ -32,6 +32,20 @@ export default function Work() {
 
     const mm = gsap.matchMedia();
 
+    /* Mobile & reduced-motion: ensure every card is fully visible.
+       GSAP autoAlpha (opacity + visibility) may have been written by a
+       previous desktop ScrollTrigger pass during SSR hydration or a resize.
+       Explicitly reset both so the native snap row shows all cards. */
+    mm.add("(max-width: 1100px), (prefers-reduced-motion: reduce)", () => {
+      const cards = gsap.utils.toArray<HTMLElement>(`.${styles.card}`);
+      cards.forEach((card) => {
+        gsap.set(card, {
+          clearProps: "transform,opacity,visibility,x,y,rotationY,scale,autoAlpha,zIndex",
+        });
+      });
+      return () => {};
+    });
+
     mm.add("(min-width: 1101px) and (prefers-reduced-motion: no-preference)", () => {
       const cards = gsap.utils.toArray<HTMLElement>(`.${styles.card}`);
       const counter = el.querySelector<HTMLElement>(`.${styles.count}`);

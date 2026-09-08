@@ -48,9 +48,12 @@ export default function Nav() {
   }, []);
 
   useEffect(() => {
-    // Add intro-active by default on mount so navbar stays hidden during loading
+    // Add intro-active by default on mount so navbar stays hidden during
+    // the tunnel intro. Desktop only — on mobile the intro scrolls away
+    // normally and does not need to hide the nav.
     if (typeof window !== "undefined") {
-      if (window.scrollY < 200) {
+      const isDesktop = window.matchMedia("(min-width: 1001px)").matches;
+      if (isDesktop && window.scrollY < 200) {
         document.body.classList.add("intro-active");
       }
     }

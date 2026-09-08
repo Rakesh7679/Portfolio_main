@@ -115,6 +115,14 @@ export default function TunnelIntro({ text = "RAKESH LAHA" }: { text?: string })
       "(max-width: 1000px), (hover: none) and (pointer: coarse)"
     ).matches;
 
+    /* On mobile the intro's sticky frame is released (Scene.module.css),
+       so the scroll-driven journey has no runway to scrub against. Skip the
+       full journey setup and show the tunnel as a live ambient background
+       that the user scrolls past normally. Nav is shown immediately. */
+    if (compact) {
+      document.body.classList.remove("intro-active");
+    }
+
     /* mobile density reduction */
     const GRID = compact ? 3 : 4;
     const NUM_SEGMENTS = compact ? 11 : 15;
@@ -354,8 +362,9 @@ export default function TunnelIntro({ text = "RAKESH LAHA" }: { text?: string })
       };
     }
 
+
     /* ================= journey state ================= */
-    document.body.classList.add("intro-active");
+    if (!compact) document.body.classList.add("intro-active");
 
     let progress = 0; /* pin progress, scrub-smoothed by ScrollTrigger */
     let scrollPos = 0; /* travel, lerped toward target — the inertia layer */
@@ -465,34 +474,51 @@ export default function TunnelIntro({ text = "RAKESH LAHA" }: { text?: string })
     };
     startLoop();
 
-    /* ================= the journey, held by its Scene =================
-       The Scene's sticky hold pins this section, so no `pin` here — this
-       trigger only reads progress across the scene's runway. */
-    const st = ScrollTrigger.create({
-      ...sceneScrub(rootEl),
-      scrub: 0.6,
-      invalidateOnRefresh: true,
-      onUpdate: (self) => {
-        progress = self.progress;
-        updateScramble(self.progress);
-        /* nav returns as the hero arrives */
-        document.body.classList.toggle("intro-active", self.progress < 0.94);
-        /* progress rail */
-        const stage = Math.min(STAGES, 1 + Math.floor(self.progress * STAGES));
-        if (stage !== stageShown && stageEl) {
-          stageShown = stage;
-          stageEl.textContent = `0${stage}`;
-        }
-        if (fillEl) fillEl.style.transform = `scaleX(${self.progress.toFixed(4)})`;
-      },
-      onLeave: () => {
-        document.body.classList.remove("intro-active");
-        stopLoop();
-      },
-      onEnterBack: () => {
-        startLoop();
-      },
-    });
+    /* ================= the journey ================= */
+    const st = ScrollTrigger.create(
+      compact
+        ? {
+            trigger: rootEl,
+            start: "top top",
+            end: "+=120%",
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              progress = self.progress;
+              updateScramble(self.progress);
+            },
+            onLeave: () => {
+              stopLoop();
+            },
+            onEnterBack: () => {
+              startLoop();
+            },
+          }
+        : {
+            ...sceneScrub(rootEl),
+            scrub: 0.6,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              progress = self.progress;
+              updateScramble(self.progress);
+              document.body.classList.toggle("intro-active", self.progress < 0.94);
+              /* progress rail */
+              const stage = Math.min(STAGES, 1 + Math.floor(self.progress * STAGES));
+              if (stage !== stageShown && stageEl) {
+                stageShown = stage;
+                stageEl.textContent = `0${stage}`;
+              }
+              if (fillEl) fillEl.style.transform = `scaleX(${self.progress.toFixed(4)})`;
+            },
+            onLeave: () => {
+              document.body.classList.remove("intro-active");
+              stopLoop();
+            },
+            onEnterBack: () => {
+              startLoop();
+            },
+          }
+    );
 
     return () => {
       alive = false;
