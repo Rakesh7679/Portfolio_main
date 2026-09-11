@@ -167,6 +167,21 @@
   white-space: nowrap;
 }
 
+@media (max-width: 480px) {
+  .spotlightContent {
+    width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+  .spotlightTitle {
+    font-size: clamp(20px, 8.5vw, 32px);
+    letter-spacing: 0.04em;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
 .spotlightSubtitle {
   margin-top: 14px;
   font-size: 11px;

@@ -244,6 +244,47 @@ export const PROJECTS: Project[] = [
     }
   },
   {
+    slug: "safar",
+    title: "Safar – On-Demand Ride Booking Platform",
+    tags: ["React.js", "Node.js", "MongoDB", "Maps"],
+    year: "2025",
+    oneLiner: "Uber-style ride booking platform connecting passengers with nearby drivers in real time.",
+    contribution: "Built the ride request flow, driver discovery, trip tracking, and responsive booking experience.",
+    coverLabel: "Safar Ride Booking",
+    cover: { bg: "#155E75", ink: "light", mark: "SAFAR" },
+    site: { url: "https://echo-ride.netlify.app", label: "Live Demo" },
+    study: {
+      role: "Full-Stack Developer",
+      timeline: "2025",
+      context: "An on-demand ride booking experience inspired by modern mobility platforms.",
+      problem: "Passengers needed a simple way to request rides, view driver availability, and follow a trip from booking to arrival.",
+      process: [
+        {
+          title: "Ride Booking Flow",
+          body: "Designed a clear passenger journey from pickup and destination selection through driver matching and trip confirmation.",
+        },
+        {
+          title: "Driver Discovery & Tracking",
+          body: "Created a real-time style interface for nearby driver visibility, trip status updates, and a focused mobile booking experience.",
+        }
+      ],
+      decisions: [
+        {
+          title: "Mobile-First Mobility UX",
+          why: "Prioritized fast actions, readable trip states, and map-oriented interactions for users booking rides on the move.",
+        }
+      ],
+      outcomes: ["Live ride booking demo", "Passenger and driver trip flow", "Responsive mobility interface"],
+      reflection: "Strengthened my understanding of location-aware product flows and the interaction patterns behind ride-hailing platforms.",
+    },
+    fr: {
+      title: "Safar – Plateforme de réservation de trajets",
+      oneLiner: "Plateforme de réservation de trajets inspirée d'Uber, reliant passagers et conducteurs.",
+      contribution: "Flux de réservation, découverte des conducteurs et suivi du trajet.",
+      tags: ["React.js", "Node.js", "MongoDB", "Cartes"],
+    }
+  },
+  {
     slug: "moodify",
     title: "Moodify – Mood-Based Music Recommendation",
     tags: ["React.js", "Spotify API", "Node.js", "Tailwind CSS"],

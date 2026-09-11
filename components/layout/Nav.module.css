@@ -265,9 +265,13 @@
     padding: 0 12px;
     display: flex !important;
     justify-content: center !important;
+    box-sizing: border-box;
+    transform: translateX(-10px);
   }
   .cap {
-    width: min(92%, 460px) !important;
+    box-sizing: border-box;
+    width: min(100%, calc(100vw - 24px), 460px) !important;
+    max-width: calc(100vw - 24px);
     margin: 0 auto !important;
     gap: 12px;
     padding: 8px 12px 8px 18px;
@@ -294,8 +298,11 @@
   .wrap {
     top: 10px;
     padding: 0 10px;
+    transform: translateX(-10px);
   }
   .cap {
+    width: calc(100vw - 20px) !important;
+    max-width: calc(100vw - 20px);
     padding: 7px 7px 7px 14px;
     gap: 8px;
   }
