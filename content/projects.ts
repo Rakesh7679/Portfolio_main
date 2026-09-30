@@ -210,7 +210,7 @@ export const PROJECTS: Project[] = [
     contribution: "Built order dispatch engine, real-time geolocation tracking over WebSockets, and merchant panel.",
     coverLabel: "DeliDrop Delivery",
     cover: { bg: "#EA580C", ink: "light", mark: "DELIDROP" },
-    site: { url: "https://delidrop-app.vercel.app", label: "Live Demo" },
+    site: { url: "https://boisterous-melba-c3a63a.netlify.app/", label: "Live Demo" },
     repo: "https://github.com/Rakeshlaha55/delidrop",
     study: {
       role: "Full-Stack Developer",
